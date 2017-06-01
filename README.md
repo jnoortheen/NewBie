@@ -22,3 +22,12 @@ installed in the system.
 
 - No need to configure external server to server static files
 - Static files are served by whitenoise
+
+## Social Logins
+
+- Django-AllAuth is used for providing all authentication activities including social logins
+- In a new environment, we need to create a Site record from django-admin (localhost:8000 will be enough for developing ,
+otherwise put the domain name)
+- Create a facebook and obtain AppID and secret as usual. Also create a web plaform for the site URL
+- For google app to get `ID` & `secret key` through `Google developer Console`
+- Create `Social Accounts › Social applications` for both Facebook and Google in django-admin 
