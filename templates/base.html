@@ -1,29 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-{% load static %}
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>{% block title %}NewBie{% endblock %}</title>
+    <title>{% block head_title %}NewBie{% endblock %}</title>
 
 
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.0/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootflat/2.0.4/css/bootflat.min.css"/>
+    <!-- Bootstrap/BootFlat CSS -->
+    <link rel="stylesheet" href="http://bootflat.github.io/css/site.min.css"/>
 
-    <!-- Custom CSS -->
-    <link href="{% static 'styles.css' %}" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    {% block extra_head %}
+    {% endblock %}
 </head>
 
 <body>
@@ -39,51 +36,49 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">NewBie</a>
+            <a class="navbar-brand" href="/">NewBie</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <!--<ul class="nav navbar-nav">-->
-                <!--<li class="active"><a href="#">Link</a></li>-->
-                <!--<li class="dropdown">-->
-                    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>-->
-                    <!--<ul class="dropdown-menu" role="menu">-->
-                        <!--<li class="dropdown-header">Setting</li>-->
-                        <!--<li><a href="#">Action</a></li>-->
-                        <!--<li><a href="#">Another action</a></li>-->
-                        <!--<li><a href="#">Something else here</a></li>-->
-                        <!--<li class="divider"></li>-->
-                        <!--<li class="active"><a href="#">Separated link</a></li>-->
-                        <!--<li class="divider"></li>-->
-                        <!--<li class="disabled"><a href="#">One more separated link</a></li>-->
-                    <!--</ul>-->
-                <!--</li>-->
-            <!--</ul>-->
+            <ul class="nav navbar-nav">
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'account_email' %}">Change E-mail</a></li>
+                <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
+                {% else %}
+                <li><a href="{% url 'account_login' %}">Sign In</a></li>
+                <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
+                {% endif %}
+            </ul>
             <!--<form class="navbar-form navbar-right" role="search">-->
                 <!--<div class="form-search search-only">-->
                     <!--<i class="search-icon glyphicon glyphicon-search"></i>-->
                     <!--<input type="text" class="form-control search-query">-->
                 <!--</div>-->
             <!--</form>-->
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+        </div>
+    </div>
 </nav>
 
 <!-- Page Content -->
 <div class="container">
-    {% block container %}
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}} alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          {{message}}
+        </div>
+        {% endfor %}
+    {% endif %}
+
+    {% block content %}
     {% endblock %}
 </div>
 {% block containOuter %}
 {% endblock %}
 
 <!-- Bootstrap Core JavaScript -->
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootflat/2.0.4/js/jquery.fs.selecter.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootflat/2.0.4/js/jquery.fs.stepper.min.js"></script>
+<script src="http://bootflat.github.io/js/site.min.js"></script>
 {% block scripts %}
 {% endblock %}
 </body>
-
 </html>
