@@ -1,5 +1,33 @@
 # NewBie
 NewBie
 
+## Tech stack
 
-NewBie Project to the Coder.
+1. Python 3.6
+1. Django 1.11
+
+## Front-end
+
+Front-end libraries are mananged by `npm` and compiled to static folder where Django can find the files.
+`django-webpack-loader` is used for managing this generated files. Hence webpack is used we need to have nodejs 
+installed in the system.
+
+- run `npm install` to install all dependecies
+- run `python manage.py collectstatic` to get files from *node_modules* to *STATIC_ROOT* from where it will get served
+
+
+## Static Files
+
+### whitenoise
+
+- No need to configure external server to server static files
+- Static files are served by whitenoise
+
+## Social Logins
+
+- Django-AllAuth is used for providing all authentication activities including social logins
+- In a new environment, we need to create a Site record from django-admin (localhost:8000 will be enough for developing ,
+otherwise put the domain name)
+- Create a facebook and obtain AppID and secret as usual. Also create a web plaform for the site URL
+- For google app to get `ID` & `secret key` through `Google developer Console`
+- Create `Social Accounts › Social applications` for both Facebook and Google in django-admin 
