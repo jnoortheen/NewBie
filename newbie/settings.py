@@ -50,10 +50,12 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
+    'django_jinja',
 
     #     custom apps
-    'authentication'
+    'authentication',
 ]
+
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 AUTH_USER_MODEL = 'authentication.User'
@@ -76,6 +78,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'newbie.urls'
 TEMPLATES = [
+    {
+        "BACKEND": "django_jinja.backend.Jinja2",
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "match_extension": ".jinja",
+        }
+    },
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
