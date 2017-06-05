@@ -1,0 +1,24 @@
+{
+  "name": "newbie",
+  "version": "1.0.0",
+  "description": "front-end package manager",
+  "main": ".webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jnoortheen/NewBie.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jnoortheen/NewBie/issues"
+  },
+  "homepage": "https://github.com/jnoortheen/NewBie#readme",
+  "dependencies": {
+    "bootflat": "^2.0.4",
+    "modernizr": "^3.5.0",
+    "normalize": "^0.3.1"
+  }
+}
