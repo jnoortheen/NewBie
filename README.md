@@ -8,10 +8,7 @@ NewBie
 
 ## Front-end
 
-Front-end libraries are mananged by `npm` and compiled to static folder where Django can find the files.
-`django-webpack-loader` is used for managing this generated files. Hence webpack is used we need to have nodejs 
-installed in the system.
-
+Front-end libraries are mananged by `npm` and `djnago-npm`.
 - run `npm install` to install all dependecies
 - run `python manage.py collectstatic` to get files from *node_modules* to *STATIC_ROOT* from where it will get served
 
