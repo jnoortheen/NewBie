@@ -17,8 +17,7 @@
   },
   "homepage": "https://github.com/jnoortheen/NewBie#readme",
   "dependencies": {
-    "bootflat": "^2.0.4",
-    "modernizr": "^3.5.0",
-    "normalize": "^0.3.1"
+    "jquery": "^3.2.1",
+    "semantic-ui": "^2.2.10"
   }
 }

@@ -51,8 +51,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
     'django_jinja',
+    'semanticuiforms',
 
-    #     custom apps
+    ## custom apps ##
     'authentication',
 ]
 
@@ -150,6 +151,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'semantic', 'dist'),
 )
 STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 STATICFILES_FINDERS = [
@@ -158,11 +160,12 @@ STATICFILES_FINDERS = [
     'npm.finders.NpmFinder',
 ]
 NPM_FILE_PATTERNS = {
-    'bootflat': ['css/*', 'js/*', 'fonts/*', 'bootflat/img/*', 'img/*', 'angularicons/*'],
+    'jquery': ['dist/jquery.min.js'],
 }
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
+# configure message tag to match CSS class names
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }

@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load account socialaccount authentication semanticui %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+{% block extra_head %}
+<style type="text/css">
+    body {
+      background-color: #DADADA;
+    }
+    body > .grid {
+      height: 100%;
+    }
+    .image {
+      margin-top: -100px;
+    }
+    .column {
+      max-width: 450px;
+    }
+</style>
+<script>
+  $(document)
+    .ready(function() {
+      $('.ui.form')
+        .form({
+          fields: {
+            email: {
+              identifier  : 'email',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your e-mail'
+                },
+                {
+                  type   : 'email',
+                  prompt : 'Please enter a valid e-mail'
+                }
+              ]
+            },
+            password: {
+              identifier  : 'password',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your password'
+                },
+                {
+                  type   : 'length[6]',
+                  prompt : 'Your password must be at least 6 characters'
+                }
+              ]
+            }
+          }
+        });
+    });
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="ui middle aligned center aligned grid">
+    <div class="column">
+        <h2 class="ui teal header">
+            <div class="content">{% trans "Sign In" %}</div>
+        </h2>
+
+        <form class="ui large form" method="POST" action="{% url 'account_login' %}">
+            <div class="ui stacked segment">
+                {% render_field form.login _icon='user' _align='left' _no_label=True %}
+                {% render_field form.password _icon='lock' _align='left' _no_label=True %}
+                <button class="ui fluid large teal submit button" type="submit">{% trans "Sign In" %}</button>
+            </div>
+            {% csrf_token %}
+            {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+            {% endif %}
+            <div class="ui error message"></div>
+        </form>
+        <div class="ui message">
+            <a href="{% url 'account_reset_password' %}">{% trans "Forgot Password?"%}</a> <br>
+            New to site? <a href="{{ signup_url }}">{% trans "Sign Up" %}</a>
+        </div>
+
+        {% get_providers as socialaccount_providers %}
+
+        {% if socialaccount_providers %}
+        <h4 class="ui dividing"></h4>
+        <p>{% blocktrans with site.name as site_name %}You may also login with{% endblocktrans %}</p>
+        {% for provider in socialaccount_providers %}
+        <a class="ui circular {{provider|get_provider_icon_name}} icon button {{provider.id}}" title="{{provider.name}}"
+           href="{% provider_login_url provider.id process='login' scope=scope auth_params=auth_params %}"
+        >
+            <i class="{{provider|get_provider_icon_name}} icon"></i>
+        </a>
+        {% endfor %}
+        {% include "socialaccount/snippets/login_extra.html" %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
