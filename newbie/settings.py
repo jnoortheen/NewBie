@@ -150,16 +150,18 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
-    os.path.join(BASE_DIR, 'node_modules', 'bootflat', 'bootflat'),
 )
 STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'npm.finders.NpmFinder',
 ]
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+NPM_FILE_PATTERNS = {
+    'bootflat': ['css/*', 'js/*', 'fonts/*', 'bootflat/img/*', 'img/*', 'angularicons/*'],
+}
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'
