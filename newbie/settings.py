@@ -167,7 +167,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # configure message tag to match CSS class names
 MESSAGE_TAGS = {
-    messages.ERROR: 'danger'
+    messages.ERROR: 'negative'
 }
 
 # Social login provider settings
