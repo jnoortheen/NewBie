@@ -19,42 +19,6 @@
       max-width: 450px;
     }
 </style>
-<script>
-  $(document)
-    .ready(function() {
-      $('.ui.form')
-        .form({
-          fields: {
-            email: {
-              identifier  : 'email',
-              rules: [
-                {
-                  type   : 'empty',
-                  prompt : 'Please enter your e-mail'
-                },
-                {
-                  type   : 'email',
-                  prompt : 'Please enter a valid e-mail'
-                }
-              ]
-            },
-            password: {
-              identifier  : 'password',
-              rules: [
-                {
-                  type   : 'empty',
-                  prompt : 'Please enter your password'
-                },
-                {
-                  type   : 'length[6]',
-                  prompt : 'Your password must be at least 6 characters'
-                }
-              ]
-            }
-          }
-        });
-    });
-</script>
 {% endblock %}
 
 {% block content %}
@@ -65,9 +29,11 @@
         </h2>
 
         <form class="ui large form" method="POST" action="{% url 'account_login' %}">
+
             <div class="ui stacked segment">
                 {% render_field form.login _icon='user' _align='left' _no_label=True %}
                 {% render_field form.password _icon='lock' _align='left' _no_label=True %}
+                {% render_field form.remember _align='left' _no_label=True %}
                 <button class="ui fluid large teal submit button" type="submit">{% trans "Sign In" %}</button>
             </div>
             {% csrf_token %}
@@ -97,4 +63,12 @@
         {% endif %}
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    {% if form.non_field_errors %}
+        $('form').form('add errors', [{% for error in form.non_field_errors %}'{{error}}', {% endfor %}]);
+    {% endif %}
+</script>
 {% endblock %}
