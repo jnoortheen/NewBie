@@ -1,10 +1,19 @@
 # NewBie
+
 NewBie
 
 ## Tech stack
 
 1. Python 3.6
 1. Django 1.11
+
+## Requirements
+
+- Install all python modules required by
+
+```commandline
+pip install -r requirements.txt
+```
 
 ## Front-end
 
